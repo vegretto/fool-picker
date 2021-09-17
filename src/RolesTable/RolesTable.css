@@ -1,0 +1,20 @@
+.ant-table-cell {
+    text-align: center;
+}
+
+.ant-table-thead > tr > th {
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .ant-table-cell {
+        font-size: 12px;
+    }
+    .ant-table-thead > tr > th {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .ant-table-thead > tr > td {
+        padding: 5px;
+    }
+}
