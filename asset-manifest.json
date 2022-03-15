@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/fool-picker/static/css/main.2b8cf92b.chunk.css",
-    "main.js": "/fool-picker/static/js/main.fdc3f106.chunk.js",
-    "main.js.map": "/fool-picker/static/js/main.fdc3f106.chunk.js.map",
+    "main.js": "/fool-picker/static/js/main.9ade108c.chunk.js",
+    "main.js.map": "/fool-picker/static/js/main.9ade108c.chunk.js.map",
     "runtime-main.js": "/fool-picker/static/js/runtime-main.715039f8.js",
     "runtime-main.js.map": "/fool-picker/static/js/runtime-main.715039f8.js.map",
     "static/css/2.786ae0dd.chunk.css": "/fool-picker/static/css/2.786ae0dd.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.786ae0dd.chunk.css",
     "static/js/2.de076994.chunk.js",
     "static/css/main.2b8cf92b.chunk.css",
-    "static/js/main.fdc3f106.chunk.js"
+    "static/js/main.9ade108c.chunk.js"
   ]
 }
