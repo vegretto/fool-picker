@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import "./RolesTable.css";
 import {useDispatch} from "react-redux";
 
+
+
 const RolesTable = (props) => {
 
     const [tableData, setTableData] = useState([])
@@ -11,6 +13,7 @@ const RolesTable = (props) => {
     const handleOpenModal = (e) => {
         dispatch({ type: 'openModal', roleId: e.target.dataset.id });
     }
+
     const columns = [
         {
             title: 'Игрок',
@@ -21,7 +24,7 @@ const RolesTable = (props) => {
                     props: {
                         style: {
                             color: record.color,
-                            background: record.bgColor
+                            background: `linear-gradient(${record.bgColor[0]} 50%, ${record.bgColor[1]} 100%)`
                         },
                     },
                     children: <div>{text}</div>,
@@ -30,18 +33,26 @@ const RolesTable = (props) => {
         },
         {
             title: 'Роль',
-            dataIndex: 'role',
-            key: 'role',
+            dataIndex: 'roles',
+            key: 'roles',
             render: (text, record) => {
+                console.log(record);
                 return {
                     props: {
                         style: {
                             color: record.color,
-                            background: record.bgColor
+                            background: `linear-gradient(${record.bgColor[0]} 50%, ${record.bgColor[1]} 100%)`
                         },
                     },
-                    children: <span className='roleLink' data-id={record.dataRole}
-                                    onClick={handleOpenModal}>{text}</span>
+                    children:
+                        <div className={'roles-list'}>
+                            {record.roles.map((role, index) => {
+                                return (
+                                    <span key={index} className='roleLink' data-id={role.dataRole}
+                                          onClick={handleOpenModal}>{role.role}{index === 0 ? ', ': ''}</span>
+                                )
+                            })}
+                        </div>
                 }
             }
         },
@@ -54,7 +65,7 @@ const RolesTable = (props) => {
                     props: {
                         style: {
                             color: record.color,
-                            background: record.bgColor
+                            background: `linear-gradient(${record.bgColor[0]} 50%, ${record.bgColor[1]} 100%)`
                         },
                     },
                     children: <div>{text}</div>,
@@ -70,7 +81,7 @@ const RolesTable = (props) => {
                     props: {
                         style: {
                             color: record.color,
-                            background: record.bgColor
+                            background: `linear-gradient(${record.bgColor[0]} 50%, ${record.bgColor[1]} 100%)`
                         },
                     },
                     children: <div>{text}</div>,
@@ -83,18 +94,36 @@ const RolesTable = (props) => {
         if (tableData.length === 0) {
             let data = [];
             props.players.forEach((player) => {
-
+            let roleQty = 1;
+            if (props.gameModes[0].isOn === true) {
+                roleQty = 2;
+            }
                 if (player.checked) {
-                    let randomRole = props.roles[props.getRandomInt(0, props.roles.length)];
-                    let newDataEntity = {
+                    let randomRole;
+                    let firstRandomRole;
+                    let roles = [];
+                    let bgColors = [];
+                    for (let i = 0; i < roleQty; i++) {
+                        randomRole = props.roles[props.getRandomInt(0, props.roles.length)];
+                        bgColors.push(randomRole.bgColor);
+                        if (i === 0) {
+                            firstRandomRole = randomRole;
+                        }
+                        let role = {
+                            role: randomRole.name,
+                            dataRole: randomRole.id,
+                            color: randomRole.color,
+                        }
+                        roles.push(role);
+                    }
+                    const newDataEntity = {
                         key: player.id,
                         player: player.label,
-                        role: randomRole.name,
-                        dataRole: randomRole.id,
-                        color: randomRole.color,
-                        bgColor: randomRole.bgColor,
-                        cardNum: randomRole.id === 0 ? 9 : props.getRandomInt(5, 8),
-                        resNum: randomRole.id === 0 ? 0 : props.getRandomInt(1, 3),
+                        roles: roles,
+                        bgColor: bgColors,
+                        color: firstRandomRole.color,
+                        cardNum: firstRandomRole.id === 0 ? 9 : props.getRandomInt(5, 8),
+                        resNum: firstRandomRole.id === 0 ? 0 : props.getRandomInt(1, 3),
                     }
 
                     data.push(newDataEntity);

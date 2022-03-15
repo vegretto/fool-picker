@@ -5,7 +5,8 @@ let initialState = {
         {id: 0, label: 'Денис', value: 'Денис', checked: true},
         {id: 1, label: 'Сергей 1', value: 'Сергей 1', checked: true},
         {id: 2, label: 'Анна', value: 'Анна', checked: true},
-        {id: 3, label: 'Сергей 2', value: 'Сергей 2', checked: true}],
+        {id: 3, label: 'Сергей 2', value: 'Сергей 2', checked: true}
+    ],
 
     playersSelector: {
         isVisible: true
@@ -16,6 +17,12 @@ let initialState = {
         title: '...',
         description: '...'
     },
+
+    gameModes: [
+        {
+            id: 0, name: 'doubleRoles', isOn: false,
+        },
+    ],
 
     roles: [
         {
@@ -37,7 +44,7 @@ let initialState = {
             name: 'Некромант',
             color: '#fff',
             bgColor: '#212121',
-            roleRules: 'Воскрешает 2 карты из отбоя в руку сопернику 3 раза за игру'
+            roleRules: 'Воскрешает половину от кол-ва своих карт в колоду противника 3 раза за игру'
         },
         {
             id: 3,
@@ -72,19 +79,44 @@ let initialState = {
             name: 'Реверсивный',
             color: '#000',
             bgColor: '#b912ff',
-            roleRules: 'Бьет большие карты меньшими, может 1 раз вернуть себе 2 свои карты из отбоя'
+            roleRules: 'Бьет большие карты меньшими'
+        },
+        {
+            id: 8,
+            name: 'Рыцарь',
+            color: '#fff',
+            bgColor: '#000f72',
+            roleRules: 'Подкидывает кому угодно, а ему может подкинуть только игрок справа'
         }
     ],
 }
 
 let appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'updatePlayers':
-            const playersCopy = [...state.players]
-            playersCopy[action.id].checked = action.checked
+        case 'setGameMode':
             return {
                 ...state,
-                players: playersCopy
+                gameModes: [
+                    ...state.gameModes.map((mode) => {
+                        if (mode.name === action.gameMode) {
+                            mode.isOn = action.value
+                        }
+                        return {...mode}
+                    })
+                ]
+            }
+        case 'updatePlayers':
+
+            return {
+                ...state,
+                players: [
+                    ...state.players.map((player, index) => {
+                        if (index === action.id) {
+                            player.checked = action.checked
+                        }
+                        return {...player}
+                    })
+                ],
             }
         case 'setPlayersSelectorVisible':
             return {
@@ -116,5 +148,5 @@ let appReducer = (state = initialState, action) => {
 }
 
 let store = createStore(appReducer);
-
+document.state = store.getState();
 export default store;

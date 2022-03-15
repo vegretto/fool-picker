@@ -14,7 +14,6 @@ const RolesTableWrapper = (props) => {
 
     const [firstMover, setFirstMover] = useState('...')
 
-
     useEffect(() => {
         if (firstMover === '...') {
             const chooseFirstMover = () => {
@@ -48,7 +47,7 @@ const RolesTableWrapper = (props) => {
         <div className="container container--main">
             <Row justify="center">
                 <Col xs={24} lg={12} align="center">
-                    <RolesTable roles={roles} players={props.players} getRandomInt={getRandomInt}/>
+                    <RolesTable roles={roles} players={props.players} getRandomInt={getRandomInt} gameModes={props.gameModes}/>
                     <br />
                     <div>Ходит { firstMover }</div>
                     <br />

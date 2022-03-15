@@ -1,6 +1,4 @@
 import {Button, Modal} from "antd";
-import {useContext} from "react";
-import {ModalDispatch} from "../RolesTableWrapper/RolesTableWrapper";
 import {useDispatch} from "react-redux";
 
 const TableModal = (props) => {
