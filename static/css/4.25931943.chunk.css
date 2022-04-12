@@ -1,0 +1,2 @@
+.blacklist{display:flex;flex-wrap:wrap;align-items:flex-start;margin-bottom:50px}.blacklist__item{display:flex;align-items:center;flex-basis:19%;max-width:19%;margin:0 5px 20px;border:2px solid #fff8dc;padding:10px;border-radius:20px;cursor:pointer;transition:.2s ease-in-out}.blacklist__item:hover{background-color:#fff8dc;transition:.2s ease-in-out}.blacklist__item--banned{background-color:#912020}.blacklist__item-icon{margin-right:15px}.blacklist__item-icon,.blacklist__item-icon img{width:50px;height:50px}
+/*# sourceMappingURL=4.25931943.chunk.css.map */
